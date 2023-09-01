@@ -1,5 +1,5 @@
 {% set name = "sphinx-design" %}
-{% set version = "0.3.0" %}
+{% set version = "0.5.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,43 +7,49 @@ package:
 
 source:
   url: https://github.com/executablebooks/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: b54482a196db98f5fb803105b143104be0269126d7cab9aeb9fc3d1adbfedcc4
+  sha256: 7b4a35db1ce724586c2408bb60f379dd34024577c43d5c8fdcd42376a16fdd98
 
 build:
   number: 0
+  skip: True  # [py<37]
   script:
-    - {{ PYTHON }} -m pip install . -vv
-  noarch: python
+    - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
-    - python >=3.6
-    - pip
-    - sphinx >=4,<6
+    - python
     - flit-core
+    - pip
+    - sphinx 5.0.2
   run:
-    - python >=3.6
-    - sphinx >=4,<6
+    - python
+    - sphinx >=5,<8
 
 test:
-  requires:
-    - myst-parser
-    - pytest
-    - pytest-regressions
-  source_files:
-    - tests/
   imports:
     - sphinx_design
+  requires:
+    - pip
+    - pytest
+    #- myst-parser
+    #- pytest-regressions
+  source_files:
+    - tests/
   commands:
-    - pytest tests -vv
+    - pip check
+    # Skip `test_sd_hide_title_myst` and `test_sd_hide_title_rst` as the packages myst-parser and pytest-regressions package isn't available on the defaults yet
+    - pytest tests -vv -k "not (test_sd_hide_title_myst or test_sd_hide_title_rst)"
 
 about:
+  home: https://github.com/executablebooks/sphinx-design
+  dev_url: https://github.com/executablebooks/sphinx-design
+  doc_url: https://sphinx-design.readthedocs.io
   license: MIT
   license_family: MIT
   license_file: LICENSE
-  summary: A sphinx extension for designing beautiful, screen-size responsive web components.
-  home: https://github.com/executablebooks/sphinx-design
-  doc_url: https://sphinx-design.readthedocs.io
+  summary: A sphinx extension for designing beautiful, screen-size responsive web components
+  description: |
+    A sphinx extension for designing beautiful, view size responsive web components.
 
 extra:
   recipe-maintainers:
