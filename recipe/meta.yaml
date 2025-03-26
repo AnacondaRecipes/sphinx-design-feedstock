@@ -23,7 +23,7 @@ requirements:
     - sphinx 5.0.2
   run:
     - python
-    - sphinx >=5,<9
+    - sphinx >=6,<9
 
 test:
   imports:
