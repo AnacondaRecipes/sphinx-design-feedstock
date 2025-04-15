@@ -20,7 +20,7 @@ requirements:
     - python
     - flit-core
     - pip
-    - sphinx 5.0.2
+    - sphinx
   run:
     - python
     - sphinx >=6,<9
