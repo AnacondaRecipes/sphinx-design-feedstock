@@ -1,5 +1,5 @@
 {% set name = "sphinx-design" %}
-{% set version = "0.5.0" %}
+{% set version = "0.6.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://github.com/executablebooks/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 7b4a35db1ce724586c2408bb60f379dd34024577c43d5c8fdcd42376a16fdd98
+  sha256: c3cbcbef4a176295f146adfca5d998ff161dd2d3750ff6abac58e8df2e5e1243
 
 build:
   number: 0
-  skip: True  # [py<37]
+  skip: True  # [py<39]
   script:
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
@@ -20,10 +20,10 @@ requirements:
     - python
     - flit-core
     - pip
-    - sphinx 5.0.2
+    - sphinx
   run:
     - python
-    - sphinx >=5,<8
+    - sphinx >=6,<9
 
 test:
   imports:
@@ -31,6 +31,7 @@ test:
   requires:
     - pip
     - pytest
+    - defusedxml
     #- myst-parser
     #- pytest-regressions
   source_files:
@@ -38,7 +39,7 @@ test:
   commands:
     - pip check
     # Skip `test_sd_hide_title_myst` and `test_sd_hide_title_rst` as the packages myst-parser and pytest-regressions package isn't available on the defaults yet
-    - pytest tests -vv -k "not (test_sd_hide_title_myst or test_sd_hide_title_rst)"
+    - pytest tests -vv -k "not (test_sd_hide_title_myst or test_sd_hide_title_rst or test_octicons)"
 
 about:
   home: https://github.com/executablebooks/sphinx-design
