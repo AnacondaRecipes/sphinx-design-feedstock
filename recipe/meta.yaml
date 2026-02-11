@@ -38,8 +38,8 @@ test:
     - tests/
   commands:
     - pip check
-    # Skip `test_sd_hide_title_myst` and `test_sd_hide_title_rst` as the packages myst-parser and pytest-regressions package isn't available on the defaults yet
-    - pytest tests -vv -k "not (test_sd_hide_title_myst or test_sd_hide_title_rst or test_octicons)"
+    # Skip test_sd_hide_title_myst, test_sd_hide_title_rst and test_material as the packages myst-parser and pytest-regressions package isn't available on the defaults yet
+    - pytest tests -vv -k "not (test_sd_hide_title_myst or test_sd_hide_title_rst or test_material or test_octicons)"
 
 about:
   home: https://github.com/executablebooks/sphinx-design
