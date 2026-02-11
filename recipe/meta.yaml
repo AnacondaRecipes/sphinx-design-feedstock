@@ -43,14 +43,13 @@ test:
 
 about:
   home: https://github.com/executablebooks/sphinx-design
-  dev_url: https://github.com/executablebooks/sphinx-design
-  doc_url: https://sphinx-design.readthedocs.io
   license: MIT
   license_family: MIT
   license_file: LICENSE
   summary: A sphinx extension for designing beautiful, screen-size responsive web components
-  description: |
-    A sphinx extension for designing beautiful, view size responsive web components.
+  description: A sphinx extension for designing beautiful, view size responsive web components.
+  dev_url: https://github.com/executablebooks/sphinx-design
+  doc_url: https://sphinx-design.readthedocs.io
 
 extra:
   recipe-maintainers:
