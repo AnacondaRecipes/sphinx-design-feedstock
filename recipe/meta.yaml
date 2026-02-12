@@ -1,5 +1,5 @@
 {% set name = "sphinx-design" %}
-{% set version = "0.6.1" %}
+{% set version = "0.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://github.com/executablebooks/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: c3cbcbef4a176295f146adfca5d998ff161dd2d3750ff6abac58e8df2e5e1243
+  sha256: c2d9e45ffafc930cb552296238da300d6d0623c0816cfbabdc14534fd16e9ca3
 
 build:
   number: 0
-  skip: True  # [py<39]
+  skip: True  # [py<311]
   script:
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
@@ -23,7 +23,7 @@ requirements:
     - sphinx
   run:
     - python
-    - sphinx >=6,<9
+    - sphinx >=7,<10
 
 test:
   imports:
@@ -38,19 +38,18 @@ test:
     - tests/
   commands:
     - pip check
-    # Skip `test_sd_hide_title_myst` and `test_sd_hide_title_rst` as the packages myst-parser and pytest-regressions package isn't available on the defaults yet
-    - pytest tests -vv -k "not (test_sd_hide_title_myst or test_sd_hide_title_rst or test_octicons)"
+    # Skip test_sd_hide_title_myst, test_sd_hide_title_rst and test_material as the packages myst-parser and pytest-regressions package isn't available on the defaults yet
+    - pytest tests -vv -k "not (test_sd_hide_title_myst or test_sd_hide_title_rst or test_material or test_octicons)"
 
 about:
   home: https://github.com/executablebooks/sphinx-design
-  dev_url: https://github.com/executablebooks/sphinx-design
-  doc_url: https://sphinx-design.readthedocs.io
   license: MIT
   license_family: MIT
   license_file: LICENSE
   summary: A sphinx extension for designing beautiful, screen-size responsive web components
-  description: |
-    A sphinx extension for designing beautiful, view size responsive web components.
+  description: A sphinx extension for designing beautiful, view size responsive web components.
+  dev_url: https://github.com/executablebooks/sphinx-design
+  doc_url: https://sphinx-design.readthedocs.io
 
 extra:
   recipe-maintainers:
